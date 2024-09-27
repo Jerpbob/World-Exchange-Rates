@@ -8,15 +8,39 @@ def extract_api_key() -> str:
     API_KEY = os.getenv('API_KEY')
     return API_KEY
 
-def extract_json(currency_code: str) -> dict:
-    API_KEY = extract_api_key()
-    url = f'https://v6.exchangerate-api.com/v6/latest/{currency_code}'
-    headers = {'Authorization': f'Bearer {API_KEY}'}
+class Extract_API_Json():
 
-    response = requests.get(url, headers=headers)
-    json_response = response.json()
+    def __init__(self) -> None:
+        self.API_KEY = extract_api_key()
 
-    return json_response
+    def extract_rates_json(self, currency_code: str) -> dict[str:float]:
+        API_KEY = self.API_KEY
+        url = f'https://v6.exchangerate-api.com/v6/latest/{currency_code}'
+        headers = {'Authorization': f'Bearer {API_KEY}'}
+
+        response = requests.get(url, headers=headers)
+        json_response = response.json()
+
+        return json_response
+
+    def extract_codes(self) -> list[list[str]]:
+        API_KEY = self.API_KEY
+        url = f'https://v6.exchangerate-api.com/v6/codes'
+        headers = {'Authorization': f'Bearer {API_KEY}'}
+
+        response = requests.get(url, headers=headers)
+        json_response = response.json()
+        codes = json_response['supported_codes']
+
+        return codes
+    
+    def convert_code_to_dict(self) -> dict[str:str]:
+        codes_list = self.extract_codes()
+        codes_dict = {code[0]:code[1] for code in codes_list}
+
+        return codes_dict
+    
 
 if __name__ == '__main__':
-    pass
+    test = Extract_API_Json()
+    print(test.convert_code_to_dict())
