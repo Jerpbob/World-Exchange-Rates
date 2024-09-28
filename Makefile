@@ -5,10 +5,13 @@ isort:
 	cd dags/etl && isort .
 
 type:
-	mypy dags/etl/bronze/
+	cd dags/etl/bronze && mypy --ignore-missing-imports extract_api.py
 
 lint:
-	flake8 dags/etl/bronze/
+	flake8 dags
 
 check:
-	isort format type lint
+	make isort 
+	make format 
+	make type 
+	make lint

@@ -15,14 +15,19 @@ def extract_rates_json(currency_code: str) -> dict[str, dict | str]:
     API_KEY = extract_api_key()
     url = f'https://v6.exchangerate-api.com/v6/latest/{currency_code}'
     headers = {'Authorization': f'Bearer {API_KEY}'}
-    response = requests.get(url, headers=headers)
 
-    if response.status_code == 200:
-        json_response = response.json()
-        return json_response
-    else:
-        print(response)
-        print(f'Error: API Request to {url} Failed')
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as errh:
+        print('HTTP Error')
+        print(errh.args[0])
+        raise
+    except requests.exceptions.ConnectionError:
+        print('Connection Error')
+        raise
+
+    return response
 
 
 def combine_base_code_dict(
