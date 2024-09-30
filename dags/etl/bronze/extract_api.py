@@ -27,7 +27,7 @@ def extract_rates_json(currency_code: str) -> dict[str, dict | str]:
         print('Connection Error')
         raise
 
-    return response
+    return response.json()
 
 
 def combine_base_code_dict(
