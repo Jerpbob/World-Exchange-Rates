@@ -2,10 +2,10 @@ format:
 	cd dags/etl && python -m black -S --line-length 79 .
 
 isort:
-	cd dags/etl && isort .
+	isort dags/etl/
 
 type:
-	cd dags/etl/bronze && mypy --ignore-missing-imports extract_api.py
+	cd dags/ && mypy --ignore-missing-imports etl/bronze/convert_parquet.py
 
 lint:
 	flake8 dags

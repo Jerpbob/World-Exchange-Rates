@@ -72,4 +72,8 @@ def extract_all_rates() -> list[dict[str, str | float]]:
 
 
 if __name__ == '__main__':
-    print(extract_all_rates())
+    import json
+
+    json_test = json.dumps(extract_all_rates(), indent=4)
+    print(json_test)
+    print(len(json_test))

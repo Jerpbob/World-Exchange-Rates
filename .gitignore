@@ -2,3 +2,4 @@ env/
 .env
 .mypy_cache
 __pycache__/
+parquet_files/
