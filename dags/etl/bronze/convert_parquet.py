@@ -20,21 +20,20 @@ def create_polars_df(
     return filtered_df
 
 
-def create_exchange_rate_parquet() -> None:
-
+def create_exchange_rate_parquet() -> str:
     exchange_rates = extract_all_rates()
+    date = datetime.today().strftime('%Y%m%d%H%M%S')
+    filename = f'{date}.parquet'
     polars_df = create_polars_df(exchange_rates)
-    polars_df.write_parquet('parquet_files/test3.parquet')
+    polars_df.write_parquet(Path('parquet_files') / filename)
+    return filename
 
 
-def display_parquet() -> None:
-    df = pl.read_parquet(Path('parquet_files') / 'test3.parquet')
+def display_parquet(filename: str) -> None:
+    df = pl.read_parquet(Path('parquet_files') / filename)
     print(df)
 
 
 if __name__ == '__main__':
-    # create_exchange_rate_parquet()
-    # display_parquet()
-    today = datetime.today()
-    date = datetime(today.year, today.month, today.day)
-    print(type(date), date)
+    display_parquet(create_exchange_rate_parquet())
+    
