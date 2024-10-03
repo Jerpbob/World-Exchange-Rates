@@ -36,4 +36,3 @@ def display_parquet(filename: str) -> None:
 
 if __name__ == '__main__':
     display_parquet(create_exchange_rate_parquet())
-    
