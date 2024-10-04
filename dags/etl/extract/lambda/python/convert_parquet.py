@@ -1,10 +1,8 @@
 from datetime import datetime
-from pathlib import Path
 
 import polars as pl
 from currency_codes import top_25_exchange_rates
 from extract_api import extract_all_rates
-
 
 def create_polars_df(
     exchange_rates: list[dict[str, str | float]]
@@ -25,12 +23,12 @@ def create_exchange_rate_parquet() -> str:
     date = datetime.today().strftime('%Y%m%d%H%M%S')
     filename = f'{date}.parquet'
     polars_df = create_polars_df(exchange_rates)
-    polars_df.write_parquet(Path('parquet_files') / filename)
+    polars_df.write_parquet('/tmp/' + filename)
     return filename
 
 
 def display_parquet(filename: str) -> None:
-    df = pl.read_parquet(Path('parquet_files') / filename)
+    df = pl.read_parquet('/tmp/' + filename)
     print(df)
 
 
