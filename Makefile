@@ -5,7 +5,7 @@ isort:
 	isort dags/etl/
 
 type:
-	cd dags/ && mypy --ignore-missing-imports etl/bronze/convert_parquet.py
+	cd dags/ && mypy --ignore-missing-imports etl/extract/invoke_lambda.py
 
 lint:
 	flake8 dags

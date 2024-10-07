@@ -4,6 +4,7 @@ import polars as pl
 from currency_codes import top_25_exchange_rates
 from extract_api import extract_all_rates
 
+
 def create_polars_df(
     exchange_rates: list[dict[str, str | float]]
 ) -> pl.DataFrame:
