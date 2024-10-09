@@ -21,7 +21,7 @@ def create_client(
     return client
 
 
-class InvokeLambdaFunction:
+class InvokeLambdaFunctionExtract:
 
     def __init__(self, access_key_id, access_secret_key, region_name):
         self.access_key_id = access_key_id
