@@ -51,7 +51,7 @@ class InvokeLambdaFunctionExtract:
 
 
 if __name__ == '__main__':
-    test_invoke = InvokeLambdaFunction(
+    test_invoke = InvokeLambdaFunctionExtract(
         ACCESS_KEY, SECRET_ACCESS_KEY, REGION_NAME
     )
     response = test_invoke.invoke_lambda_function()
