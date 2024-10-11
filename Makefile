@@ -5,7 +5,7 @@ isort:
 	isort dags/etl/
 
 type:
-	cd dags/ && mypy --ignore-missing-imports etl/extract/invoke_lambda.py
+	cd dags/ && mypy --ignore-missing-imports etl/transform/lambda/python/list_s3_objects.py
 
 lint:
 	flake8 dags
